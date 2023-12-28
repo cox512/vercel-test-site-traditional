@@ -6,6 +6,8 @@ const cookieSession = require("cookie-session");
 require("dotenv").config();
 const PORT = process.env.PORT;
 
+console.log("My port:", PORT)
+
 require("./config/passport");
 
 const passport = require("passport");
