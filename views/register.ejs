@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./head.ejs') %>
+</head>
+<body>
+    <h1>Register Page</h1>
+    <form method="post" action="register">
+        Username:
+        <br>
+        <input type="text" name="uname">
+        <br>
+        First Name:
+        <br>
+        <input type="text" name="fname">
+        <br>
+        Last Name:
+        <br>
+        <input type="text" name="lname">
+        <br>
+        Email:
+        <br>
+        <input type="text" name="email">
+        <br>
+        Company:
+        <br>
+        <input type="text" name="company">
+        <br>
+        Password:
+        <br>
+        <input type="password" name="pw">
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+
+        <% if (currentUser) { %>
+            <%- include('./messenger-user.ejs') %>
+        <% } else { %>
+            <%- include('./messenger-visitor.ejs') %>
+        <% } %>
+</body>
+</html>

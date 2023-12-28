@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./head.ejs') %>
+</head>
+<body>
+<h1>You are not authenticated</h1>
+<p><a href="/login">Login</a></p>
+
+<% if (currentUser) { %>
+    <%- include('./messenger-user.ejs') %>
+<% } else { %>
+    <%- include('./messenger-visitor.ejs') %>
+<% } %>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./head.ejs') %>
+</head>
+<body>
+    <main class="about__display--row">
+        <h1>Home</h1>
+        <% if (currentUser) { %>
+
+        <p>Welcome, <%= currentUser.fname%></p>
+        <p>NOTE: TOUR BUTTON #1 ONLY WORKS ON THE LOGGED OUT SCREEN</p>
+        <br>
+        <p>Feel free to <a href="/logout" onclick="Intercom('shutdown')">logout</a> if you want.</p>
+            <% } else { %>
+        <p>Welcome, Guest</p>
+        <br>
+        <p>Please <a href="/register">register</a> or <a href="/login" >login</a></p>
+        <% } %>
+    </main> 
+    <div class="bot-buttons" style="position:relative">
+        <button type="button" class="button-bot button-one" style="display:inline">Bot Button 1</button>
+        <button type="button" class="button-bot button-two" style="display:inline">Bot Button 2</button>
+        <br/>
+        <br/>
+        <button type="button" class="button-tour-one" style="display:inline" onclick="Intercom('startTour', 279111)">Tour Button 1</button>
+        <button type="button" class="button-tour-two" style="display:inline" onclick="Intercom('startTour', 279727)">Tour Button 2</button>
+        <br/>
+        <br/>
+        <button type="button" class="button-survey-one" style="display:inline" onclick="Intercom('startSurvey', 24407803)">Large Survey</button>
+        <button type="button" class="button-survey-two" style="display:inline" onclick="Intercom('startSurvey', 24407890)">Small Survey</button>
+        <a class="survey_link" href="https://evening-shelf-73540.herokuapp.com/?intercom_survey_id=24407803">Survey Link</a>
+        <br/>
+        <br/>
+        <a class="button-help-center" href="https://intercom.help/narnia-4d7ae34e3be0">Help Center</a>
+        <br/>
+        <br/>
+        <button type="button" class="button-bot button-one" id="event" onclick="Intercom('trackEvent', 'event-click')" style="display:inline" data-intercom-target="Button">Event 1</button>
+        <button type="button" class="button-bot button-one" id="event" onclick="Intercom('trackEvent', 'event-click')" style="display:inline" data-intercom-target="Button">Event 2</button>
+
+
+    </div>
+
+    <% if (currentUser) { %>
+        <%- include('./messenger-user.ejs') %>
+    <% } else { %> -->
+        <%- include('./messenger-visitor.ejs') %>
+    <% } %>    
+
+</body>
+</html>
