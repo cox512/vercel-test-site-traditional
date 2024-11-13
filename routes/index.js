@@ -119,4 +119,23 @@ router.get("/login-failure", (req, res, next) => {
   });
 });
 
+router.get("/api", (req, res, next) => {
+  
+  let api_object = {
+  "totalSize": 1,
+  "done": true,
+  "records": [
+    {
+      "attributes": {
+        "type": "User",
+        "url": "/services/data/v61.0/sobjects/User/0053o000009Z0P1AAK"
+      },
+      "Id": "0053o000009Z0P1AAK"
+    }
+  ]}
+  
+  return api_object
+  
+});
+
 module.exports = router;
