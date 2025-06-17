@@ -2,65 +2,145 @@
 <html lang="en">
 <head>
     <%- include('./head.ejs') %>
-      <!-- Google Tag Manager -->
-<!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-TQV53SD');</script> -->
-<!-- End Google Tag Manager -->
-   
-     
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TQV53SD"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TQV53SD"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> -->
 <!-- End Google Tag Manager (noscript) -->
     <main class="about__display--row">
         <h1>Home</h1>
-        <% if (currentUser) { %>
+        <h2>Log in to Intercom</h2>
+        <p>Please enter your details to log in to Intercom.</p>
+    </main>
 
-        <p>Welcome, <%= currentUser.fname%></p>
-        <p>NOTE: TOUR BUTTON #1 ONLY WORKS ON THE LOGGED OUT SCREEN</p>
-        <br>
-        <p>Feel free to <a href="/logout" onclick="Intercom('shutdown')">logout</a> if you want.</p>
-            <% } else { %>
-        <p>Welcome, Guest</p>
-        <br>
-        <p>Please <a href="/register">register</a> or <a href="/login" >login</a></p>
-        <% } %>
-    </main> 
-    <div class="bot-buttons" style="position:relative">
-        <button type="button" class="button-bot button-one" style="display:inline">Bot Button 1</button>
-        <button type="button" class="button-bot button-two" style="display:inline">Bot Button 2</button>
-        <br/>
-        <br/>
-        <button type="button" class="button-tour-one" style="display:inline" onclick="Intercom('startTour', 279111)">Tour Button 1</button>
-        <button type="button" class="button-tour-two" style="display:inline" onclick="Intercom('startTour', 279727)">Tour Button 2</button>
-        <a class="tour_link" href="https://useful-useful-daffodil.glitch.me/?product_tour_id=556887">Tour Link</a>
-        <br/>
-        <br/>
-        <button type="button" class="button-survey-one" style="display:inline" onclick="Intercom('startSurvey', 24407803)">Large Survey</button>
-        <button type="button" class="button-survey-two" style="display:inline" onclick="Intercom('startSurvey', 24407890)">Small Survey</button>
-        <a class="survey_link" href="https://evening-shelf-73540.herokuapp.com/?intercom_survey_id=24407803">Survey Link</a>
-        <br/>
-        <br/>
-        <a class="button-help-center" href="https://intercom.help/narnia-4d7ae34e3be0">Help Center</a>
-        <br/>
-        <br/>
-        <button type="button" class="button-bot button-one" id="event" onclick="Intercom('trackEvent', 'event-click')" style="display:inline" data-intercom-target="Button">Event 1</button>
-        <button type="button" class="button-bot button-one" id="event" onclick="Intercom('trackEvent', 'event-click')" style="display:inline" data-intercom-target="Button">Event 2</button>
-        <br/>
-        <br/>
-        <a href="https://useful-useful-daffodil.glitch.me/protected-route" target="_blank">Link to a new tab</a>
+    <div class="forms-container">
+        <div class="form-column">
+            <div class="form-container">
+                <form id="userDataForm">
+                    <div class="form-group">
+                        <label for="user_id">User ID:</label>
+                        <input type="text" id="user_id" name="user_id">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="company_id">Company ID:</label>
+                        <input type="text" id="company_id" name="company_id">
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company Name:</label>
+                        <input type="text" id="company" name="company">
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" class="submit-btn">Boot User</button>
+                        <button type="button" class="clear-btn" onclick="clearBootForm()">Clear Form</button>
+                    </div>
+                </form>
+            </div>
 
+            <div class="form-container">
+                <h3>Add Custom Attributes</h3>
+                <form id="customAttributesForm">
+                    <div class="form-group">
+                        <label for="attribute_name">Attribute Name:</label>
+                        <input type="text" id="attribute_name" name="attribute_name" placeholder="e.g., subscription_type">
+                    </div>
+                    <div class="form-group">
+                        <label for="attribute_value">Attribute Value:</label>
+                        <input type="text" id="attribute_value" name="attribute_value" placeholder="e.g., premium">
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" class="submit-btn">Update User</button>
+                        <button type="button" class="clear-btn" onclick="clearAttributesForm()">Clear Form</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="action-buttons">
+                <button type="button" class="empty-update-btn" onclick="performEmptyUpdate()">Empty Update</button>
+                <button type="button" class="shutdown-btn" onclick="performShutdown()">Shutdown</button>
+            </div>
+        </div>
+
+        <div class="form-column">
+            <div class="form-container">
+                <h3>Track Events</h3>
+                <form id="trackEventForm">
+                    <div class="form-group">
+                        <label for="event_name">Event Name:</label>
+                        <input type="text" id="event_name" name="event_name" required placeholder="e.g., invited-friend">
+                    </div>
+                    <div class="form-group">
+                        <label for="metadata_name">Metadata Name:</label>
+                        <input type="text" id="metadata_name" name="metadata_name" placeholder="e.g., invitee_email">
+                    </div>
+                    <div class="form-group">
+                        <label for="metadata_value">Metadata Value:</label>
+                        <input type="text" id="metadata_value" name="metadata_value" placeholder="e.g., pi@example.org">
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" class="submit-btn">Submit</button>
+                        <button type="button" class="clear-btn" onclick="clearTrackEventForm()">Clear Form</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="form-container">
+                <h3>Trigger Tour</h3>
+                <form id="tourForm">
+                    <div class="form-group">
+                        <label for="tour_id">Tour ID:</label>
+                        <input type="number" id="tour_id" name="tour_id" required placeholder="e.g., 123">
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" class="submit-btn">Start Tour</button>
+                        <button type="button" class="clear-btn" onclick="clearTourForm()">Clear Form</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
-    <% if (currentUser) { %>
-        <%- include('./messenger-user.ejs') %>
-    <% } else { %> -->
-        <%- include('./messenger-visitor.ejs') %>
-    <% } %>
+    <div class="bot-buttons">
+        <div class="button-row">
+            <button type="button" class="button-bot button-one">Bot Button 1</button>
+            <button type="button" class="button-bot button-two">Bot Button 2</button>
+        </div>
+        <div class="button-row">
+            <button type="button" class="button-tour-one" onclick="Intercom('startTour', 279111)">Tour Button 1</button>
+            <button type="button" class="button-tour-two" onclick="Intercom('startTour', 279727)">Tour Button 2</button>
+            <a class="tour_link" href="https://useful-useful-daffodil.glitch.me/?product_tour_id=556887">Tour Link</a>
+        </div>
+        <div class="button-row">
+            <button type="button" class="button-survey-one" onclick="Intercom('startSurvey', 24407803)">Large Survey</button>
+            <button type="button" class="button-survey-two" onclick="Intercom('startSurvey', 24407890)">Small Survey</button>
+            <a class="survey_link" href="https://evening-shelf-73540.herokuapp.com/?intercom_survey_id=24407803">Survey Link</a>
+        </div>
+        <div class="button-row">
+            <a class="button-help-center" href="https://intercom.help/narnia-4d7ae34e3be0">Help Center</a>
+        </div>
+        <div class="button-row">
+            <button type="button" class="button-bot button-one" id="event" onclick="Intercom('trackEvent', 'event-click')" data-intercom-target="Button">Event 1</button>
+            <button type="button" class="button-bot button-one" id="event" onclick="Intercom('trackEvent', 'event-click')" data-intercom-target="Button">Event 2</button>
+        </div>
+        <div class="button-row">
+            <a href="/new-tab" target="_blank">Link to a new tab</a>
+        </div>
+        <div class="button-row">
+            <a href="/page-two">Page Two</a>
+        </div>
+    </div>
+
+    <script src="/scripts.js"></script>
+    <%- include('./messenger-visitor.ejs') %>
+
 </body>
 </html>

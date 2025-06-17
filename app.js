@@ -1,67 +1,36 @@
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
-const db = mongoose.connection;
-const cookieSession = require("cookie-session");
+const path = require("path");
 require("dotenv").config();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
-console.log("My port:", PORT)
-
-require("./config/passport");
-
-const passport = require("passport");
-const routes = require("./routes");
-// const connection = require("./config/database.js");
-
-//===============================
-// DATABASE
-//===============================
-const MONGO_URI = process.env.MONGO_URI;
-
-mongoose.connect(
-  MONGO_URI,
-  { useNewUrlParser: true, useUnifiedTopology: true },
-  () => {
-    console.log("the connection with mongod is established");
-  }
+console.log(
+  "DEBUG: Server starting with latest code -",
+  new Date().toISOString()
 );
+console.log("My port:", PORT);
 
-db.on("error", (err) => console.log(err.message + " is Mongod not running?"));
-db.on("connected", () => console.log("mongo connected: ", MONGO_URI));
-db.on("disconnected", () => console.log("mongo disconnected"));
-db.on("open", () => {
-  console.log("connected to Mongo");
-});
+const routes = require("./routes");
+
 /**
  * -------------- GENERAL SETUP ----------------
  */
 
 // Create the Express application
-
 app.use(express.json());
-app.use(express.urlencoded({ extended: true })); //was true
+app.use(express.urlencoded({ extended: true }));
 
-/**
- * -------------- SESSION SETUP ----------------
- */
+// Serve static files
+app.use(express.static(path.join(__dirname, "public")));
 
-app.use(
-  cookieSession({
-    maxAge: 30 * 24 * 40 * 60 * 1000,
-    keys: [process.env.COOKIE_KEY], // key used to encrypt our cookie.
-  })
-);
+// Direct route for CSS
+app.get("/styles.css", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "styles.css"));
+});
 
-/**
- * -------------- PASSPORT AUTHENTICATION ----------------
- */
-
-app.use(passport.initialize()); //Refreshes the passport middleware every time a route is loaded. So the session doesn't expire.
-app.use(passport.session());
-app.use(express.static("public"));
-
-//
+// Set up view engine
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
 /**
  * -------------- ROUTES ----------------
@@ -69,8 +38,31 @@ app.use(express.static("public"));
 // Imports all of the routes from ./routes/index.js
 app.use(routes);
 
+app.get("/", (req, res) => {
+  res.render("landing");
+});
+
+app.get("/new-tab", (req, res) => {
+  res.render("new-tab");
+});
+
+app.get("/page-two", (req, res) => {
+  res.render("page-two");
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});
+
 /**
  * -------------- SERVER ----------------
  */
 
-app.listen(PORT, () => console.log("Listening on port:", PORT));
+if (process.env.NODE_ENV !== "production") {
+  app.listen(PORT, () => console.log("Listening on port:", PORT));
+}
+
+// Export the Express API
+module.exports = app;

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./head.ejs') %>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="message-container">
+        <h1 class="message">Choose a background color</h1>
+        <div class="color-selector">
+            <select id="colorSelect" onchange="changeBackgroundColor(this.value)">
+                <option value="">Select a color</option>
+                <option value="orange">Orange</option>
+                <option value="red">Red</option>
+                <option value="green">Green</option>
+                <option value="blue">Blue</option>
+            </select>
+        </div>
+    </div>
+
+    <script>
+        function changeBackgroundColor(color) {
+            // Remove all background color classes
+            document.body.classList.remove('bg-orange', 'bg-red', 'bg-green', 'bg-blue');
+
+            // Add the selected color class if a color was chosen
+            if (color) {
+                document.body.classList.add('bg-' + color);
+            }
+        }
+    </script>
+
+    <script src="/scripts.js"></script>
+    <%- include('./messenger-visitor.ejs') %>
+</body>
+</html>
