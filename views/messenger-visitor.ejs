@@ -1,6 +1,11 @@
 <script>
     const APP_ID = "<%= env.INTERCOM_APP_ID %>";
 
+    // Check if APP_ID is properly set
+    if (!APP_ID || APP_ID === "undefined") {
+        console.warn("Intercom APP_ID is not set. Please check your .env file.");
+    }
+
     window.intercomSettings = {
         app_id: APP_ID,
     };

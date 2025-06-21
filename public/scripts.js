@@ -31,6 +31,25 @@ function performShutdown() {
   Intercom("shutdown");
 }
 
+// Modal functions
+function openModal(modalId) {
+  document.getElementById(modalId).style.display = "block";
+}
+
+function closeModal(modalId) {
+  document.getElementById(modalId).style.display = "none";
+}
+
+// Close modal when clicking outside of it (except for tourModal)
+window.onclick = function (event) {
+  if (
+    event.target.classList.contains("modal") &&
+    event.target.id !== "tourModal"
+  ) {
+    event.target.style.display = "none";
+  }
+};
+
 // Wait for DOM to be fully loaded
 document.addEventListener("DOMContentLoaded", function () {
   // Tour form submission handler
@@ -41,6 +60,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (tourId) {
       Intercom("startTour", tourId);
+      clearTourForm();
+      closeModal("tourModal");
     }
   });
 
@@ -58,15 +79,37 @@ document.addEventListener("DOMContentLoaded", function () {
         .value.toLowerCase();
       const metadataValue = document.getElementById("metadata_value").value;
 
-      if (metadataName && metadataValue) {
-        // If metadata is provided, create metadata object
-        const metadata = {
-          [metadataName]: metadataValue,
-        };
-        Intercom("trackEvent", eventName, metadata);
-      } else {
-        // If no metadata, just track the event
-        Intercom("trackEvent", eventName);
+      // Check if event name is provided
+      if (!eventName.trim()) {
+        alert(
+          "There was an error submitting the event - Event name is required"
+        );
+        return;
+      }
+
+      try {
+        if (metadataName && metadataValue) {
+          // If metadata is provided, create metadata object
+          const metadata = {
+            [metadataName]: metadataValue,
+          };
+          Intercom("trackEvent", eventName, metadata);
+        } else {
+          // If no metadata, just track the event
+          Intercom("trackEvent", eventName);
+        }
+
+        // Show success message
+        alert(`${eventName} has been successfully submitted`);
+
+        // Clear the form after successful submission
+        clearTrackEventForm();
+
+        // Close the modal after successful submission
+        closeModal("trackEventModal");
+      } catch (error) {
+        // Show error message
+        alert(`There was an error submitting the ${eventName} event`);
       }
     });
 

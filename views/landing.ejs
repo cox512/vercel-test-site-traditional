@@ -66,8 +66,50 @@
         </div>
 
         <div class="form-column">
-            <div class="form-container">
+            <div class="modal-buttons-container">
+                <h2 style="text-align: center; margin-bottom: 20px;">Modals</h2>
+                <button type="button" class="modal-btn" onclick="openModal('trackEventModal')">Track Events</button>
+                <button type="button" class="modal-btn" onclick="openModal('tourModal')">Trigger Tour</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="bot-buttons">
+        <div class="button-row" data-intercom-target="bot-button">
+            <button type="button" class="button-bot button-one">Bot Button</button>
+        </div>
+        <div class="button-row">
+            <button type="button" class="button-tour-one" onclick="Intercom('startTour', 598573)">Tour Button</button>
+            <a class="tour_link" href="https://intercom-trad-demo.vercel.app/?product_tour_id=617424">Tour Link</a>
+        </div>
+        <div class="button-row">
+            <button type="button" class="button-survey-one" onclick="Intercom('startSurvey', 24407803)">Large Survey</button>
+            <button type="button" class="button-survey-two" onclick="Intercom('startSurvey', 24407890)">Small Survey</button>
+            <a class="survey_link" href="https://intercom-trad-demo.vercel.app?intercom_survey_id=24407890">Survey Link</a>
+        </div>
+        <div class="button-row">
+            <a class="button-help-center" href="https://intercom.help/narnia-4d7ae34e3be0">Help Center</a>
+        </div>
+        <div class="button-row">
+            <button type="button" class="button-bot button-one" id="event" onclick="Intercom('trackEvent', 'event-click')" data-intercom-target="Button">Event</button>
+        </div>
+        <div class="button-row">
+            <a href="/new-tab" target="_blank">Link to a new tab</a>
+        </div>
+        <div class="button-row">
+            <a href="/page-two">Page Two</a>
+        </div>
+    </div>
+
+    <!-- Track Events Modal -->
+    <div id="trackEventModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
                 <h3>Track Events</h3>
+                <p>You can dismiss this modal by clicking anywhere outside of it.</p>
+                <span class="close" onclick="closeModal('trackEventModal')">&times;</span>
+            </div>
+            <div class="modal-body">
                 <form id="trackEventForm">
                     <div class="form-group">
                         <label for="event_name">Event Name:</label>
@@ -87,9 +129,18 @@
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
 
-            <div class="form-container">
+    <!-- Trigger Tour Modal -->
+    <div id="tourModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
                 <h3>Trigger Tour</h3>
+                <p>You must submit, cancel, or dismiss this modal to access the background UI.</p>
+                <span class="close" onclick="closeModal('tourModal')">&times;</span>
+            </div>
+            <div class="modal-body">
                 <form id="tourForm">
                     <div class="form-group">
                         <label for="tour_id">Tour ID:</label>
@@ -98,36 +149,10 @@
                     <div class="button-group">
                         <button type="submit" class="submit-btn">Start Tour</button>
                         <button type="button" class="clear-btn" onclick="clearTourForm()">Clear Form</button>
+                        <button type="button" class="clear-btn" onclick="closeModal('tourModal')">Cancel</button>
                     </div>
                 </form>
             </div>
-        </div>
-    </div>
-
-    <div class="bot-buttons">
-        <div class="button-row" data-intercom-target="bot-button">
-            <button type="button" class="button-bot button-one">Bot Button 1</button>
-        </div>
-        <div class="button-row">
-            <button type="button" class="button-tour-one" onclick="Intercom('startTour', 598573)">Tour Button 1</button>
-            <a class="tour_link" href="https://intercom-trad-demo.vercel.app/?product_tour_id=617424">Tour Link</a>
-        </div>
-        <div class="button-row">
-            <button type="button" class="button-survey-one" onclick="Intercom('startSurvey', 24407803)">Large Survey</button>
-            <button type="button" class="button-survey-two" onclick="Intercom('startSurvey', 24407890)">Small Survey</button>
-            <a class="survey_link" href="https://intercom-trad-demo.vercel.app?intercom_survey_id=24407890">Survey Link</a>
-        </div>
-        <div class="button-row">
-            <a class="button-help-center" href="https://intercom.help/narnia-4d7ae34e3be0">Help Center</a>
-        </div>
-        <div class="button-row">
-            <button type="button" class="button-bot button-one" id="event" onclick="Intercom('trackEvent', 'event-click')" data-intercom-target="Button">Event 1</button>
-        </div>
-        <div class="button-row">
-            <a href="/new-tab" target="_blank">Link to a new tab</a>
-        </div>
-        <div class="button-row">
-            <a href="/page-two">Page Two</a>
         </div>
     </div>
 
