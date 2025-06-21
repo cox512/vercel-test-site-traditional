@@ -3,18 +3,140 @@
 <head>
     <%- include('./head.ejs') %>
     <link rel="stylesheet" href="/styles.css">
+    <style>
+        .dropdowns-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dropdown-section {
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .dropdown-title {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        /* Style the select dropdown to match the custom dropdown */
+        .color-selector select {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 1em;
+            cursor: pointer;
+            min-width: 150px;
+            text-align: left;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 16px;
+            padding-right: 32px;
+        }
+
+        .color-selector select:hover {
+            border-color: #2196F3;
+        }
+
+        /* Custom hover dropdown styles */
+        .hover-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .hover-dropdown-button {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 1em;
+            cursor: pointer;
+            min-width: 150px;
+            text-align: left;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 16px;
+            padding-right: 32px;
+        }
+
+        .hover-dropdown-button:hover {
+            border-color: #2196F3;
+        }
+
+        .hover-dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 150px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            z-index: 1;
+            top: 100%;
+            left: 0;
+        }
+
+        .hover-dropdown:hover .hover-dropdown-content {
+            display: block;
+        }
+
+        .hover-dropdown-option {
+            color: black;
+            padding: 8px 12px;
+            text-decoration: none;
+            display: block;
+            cursor: pointer;
+        }
+
+        .hover-dropdown-option:hover {
+            background-color: #f1f1f1;
+        }
+
+
+    </style>
 </head>
 <body>
     <div class="message-container">
         <h1 class="message">Choose a background color</h1>
-        <div class="color-selector">
-            <select id="colorSelect" onchange="changeBackgroundColor(this.value)">
-                <option value="">Select a color</option>
-                <option value="orange">Orange</option>
-                <option value="red">Red</option>
-                <option value="green">Green</option>
-                <option value="blue">Blue</option>
-            </select>
+        <div class="dropdowns-container">
+            <!-- Click-based dropdown -->
+            <div class="dropdown-section">
+                <h4 class="dropdown-title">Displays on click</h4>
+                <div class="color-selector">
+                    <select id="colorSelect" onchange="changeBackgroundColor(this.value)">
+                        <option value="">Select a color</option>
+                        <option value="orange">Orange</option>
+                        <option value="red">Red</option>
+                        <option value="green">Green</option>
+                        <option value="blue">Blue</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Hover-based dropdown -->
+            <div class="dropdown-section">
+                <h4 class="dropdown-title">Displays on hover</h4>
+                <div class="hover-dropdown">
+                    <div class="hover-dropdown-button" id="hoverDropdownButton">Select a color</div>
+                    <div class="hover-dropdown-content">
+                        <div class="hover-dropdown-option" onclick="changeBackgroundColorHover('')">Select a color</div>
+                        <div class="hover-dropdown-option" onclick="changeBackgroundColorHover('orange')">Orange</div>
+                        <div class="hover-dropdown-option" onclick="changeBackgroundColorHover('red')">Red</div>
+                        <div class="hover-dropdown-option" onclick="changeBackgroundColorHover('green')">Green</div>
+                        <div class="hover-dropdown-option" onclick="changeBackgroundColorHover('blue')">Blue</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -26,6 +148,20 @@
             // Add the selected color class if a color was chosen
             if (color) {
                 document.body.classList.add('bg-' + color);
+            }
+        }
+
+        function changeBackgroundColorHover(color) {
+            // Remove all background color classes
+            document.body.classList.remove('bg-orange', 'bg-red', 'bg-green', 'bg-blue');
+
+            // Update the button text
+            const button = document.getElementById('hoverDropdownButton');
+            if (color) {
+                document.body.classList.add('bg-' + color);
+                button.textContent = color.charAt(0).toUpperCase() + color.slice(1);
+            } else {
+                button.textContent = 'Select a color';
             }
         }
     </script>
