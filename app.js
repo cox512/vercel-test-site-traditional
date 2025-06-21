@@ -32,6 +32,12 @@ app.get("/styles.css", (req, res) => {
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+// Make environment variables available to all EJS templates
+app.use((req, res, next) => {
+  res.locals.env = process.env;
+  next();
+});
+
 /**
  * -------------- ROUTES ----------------
  */
