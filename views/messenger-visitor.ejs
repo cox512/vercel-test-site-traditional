@@ -1,5 +1,5 @@
 <script>
-    const APP_ID = "<%= env.INTERCOM_APP_ID %>";
+    const APP_ID = "<%= typeof env !== 'undefined' && env.INTERCOM_APP_ID ? env.INTERCOM_APP_ID : 'bwfz4uhe' %>";
 
     window.intercomSettings = {
         app_id: APP_ID,
