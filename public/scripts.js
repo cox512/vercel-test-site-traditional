@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Create boot data object, only including non-empty values
       const bootData = {
-        app_id: "bwfz4uhe",
+        app_id: "<%= env.INTERCOM_APP_ID %>",
       };
 
       // Only add user_id if it's not empty
