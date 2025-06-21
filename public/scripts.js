@@ -50,8 +50,119 @@ window.onclick = function (event) {
   }
 };
 
+// Sidebar functionality
+function toggleSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  const mainContent = document.getElementById("mainContent");
+  const toggleBtn = document.getElementById("sidebarToggle");
+  const overlay = document.getElementById("sidebarOverlay");
+
+  const isOpen = sidebar.classList.contains("open");
+
+  if (isOpen) {
+    closeSidebar();
+  } else {
+    openSidebar();
+  }
+}
+
+function openSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  const mainContent = document.getElementById("mainContent");
+  const toggleBtn = document.getElementById("sidebarToggle");
+  let overlay = document.getElementById("sidebarOverlay");
+
+  // Create overlay if it doesn't exist
+  if (!overlay) {
+    overlay = document.createElement("div");
+    overlay.id = "sidebarOverlay";
+    overlay.className = "sidebar-overlay";
+    document.body.appendChild(overlay);
+
+    // Add click event to overlay to close sidebar
+    overlay.addEventListener("click", closeSidebar);
+  }
+
+  sidebar.classList.add("open");
+
+  // Only shift content on desktop
+  if (window.innerWidth > 768) {
+    mainContent.classList.add("shifted");
+    toggleBtn.classList.add("shifted");
+  } else {
+    // Show overlay on mobile/tablet
+    overlay.classList.add("active");
+  }
+}
+
+function closeSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  const mainContent = document.getElementById("mainContent");
+  const toggleBtn = document.getElementById("sidebarToggle");
+  const overlay = document.getElementById("sidebarOverlay");
+
+  sidebar.classList.remove("open");
+  mainContent.classList.remove("shifted");
+  toggleBtn.classList.remove("shifted");
+
+  if (overlay) {
+    overlay.classList.remove("active");
+  }
+}
+
+// Handle window resize
+function handleResize() {
+  const sidebar = document.getElementById("sidebar");
+  const mainContent = document.getElementById("mainContent");
+  const toggleBtn = document.getElementById("sidebarToggle");
+  const overlay = document.getElementById("sidebarOverlay");
+
+  if (window.innerWidth > 768) {
+    // Desktop behavior
+    if (sidebar.classList.contains("open")) {
+      mainContent.classList.add("shifted");
+      toggleBtn.classList.add("shifted");
+    }
+    if (overlay) {
+      overlay.classList.remove("active");
+    }
+  } else {
+    // Mobile/tablet behavior
+    mainContent.classList.remove("shifted");
+    toggleBtn.classList.remove("shifted");
+    if (sidebar.classList.contains("open") && overlay) {
+      overlay.classList.add("active");
+    }
+  }
+}
+
 // Wait for DOM to be fully loaded
 document.addEventListener("DOMContentLoaded", function () {
+  // Sidebar event listeners
+  const sidebarToggle = document.getElementById("sidebarToggle");
+  const closeSidebarBtn = document.getElementById("closeSidebar");
+
+  if (sidebarToggle) {
+    sidebarToggle.addEventListener("click", toggleSidebar);
+  }
+
+  if (closeSidebarBtn) {
+    closeSidebarBtn.addEventListener("click", closeSidebar);
+  }
+
+  // Handle window resize
+  window.addEventListener("resize", handleResize);
+
+  // Close sidebar when pressing Escape key
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      const sidebar = document.getElementById("sidebar");
+      if (sidebar && sidebar.classList.contains("open")) {
+        closeSidebar();
+      }
+    }
+  });
+
   // Tour form submission handler
   document.getElementById("tourForm").addEventListener("submit", function (e) {
     e.preventDefault();

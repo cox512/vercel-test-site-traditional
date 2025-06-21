@@ -5,99 +5,146 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <main class="about__display--row">
-        <h1>Intercom Test Site - Traditional installation</h1>
-        <p>Please enter your details to log in to Intercom.</p>
-    </main>
-
-    <div class="forms-container">
-        <div class="form-column">
-            <div class="form-container">
-                <form id="userDataForm">
-                    <div class="form-group">
-                        <label for="user_id">User ID:</label>
-                        <input type="text" id="user_id" name="user_id">
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Name:</label>
-                        <input type="text" id="name" name="name">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email">
-                    </div>
-                    <div class="form-group">
-                        <label for="company_id">Company ID:</label>
-                        <input type="text" id="company_id" name="company_id">
-                    </div>
-                    <div class="form-group">
-                        <label for="company">Company Name:</label>
-                        <input type="text" id="company" name="company">
-                    </div>
-                    <div class="button-group">
-                        <button type="submit" class="submit-btn">Boot User</button>
-                        <button type="button" class="clear-btn" onclick="clearBootForm()">Clear Form</button>
-                    </div>
-                </form>
-            </div>
-
-            <div class="form-container">
-                <h3>Add Custom Attributes</h3>
-                <form id="customAttributesForm">
-                    <div class="form-group">
-                        <label for="attribute_name">Attribute Name:</label>
-                        <input type="text" id="attribute_name" name="attribute_name" placeholder="e.g., subscription_type">
-                    </div>
-                    <div class="form-group">
-                        <label for="attribute_value">Attribute Value:</label>
-                        <input type="text" id="attribute_value" name="attribute_value" placeholder="e.g., premium">
-                    </div>
-                    <div class="button-group">
-                        <button type="submit" class="submit-btn">Update User</button>
-                        <button type="button" class="clear-btn" onclick="clearAttributesForm()">Clear Form</button>
-                    </div>
-                </form>
-            </div>
-
-            <div class="action-buttons">
-                <button type="button" class="empty-update-btn" onclick="performEmptyUpdate()">Empty Update</button>
-                <button type="button" class="shutdown-btn" onclick="performShutdown()">Shutdown</button>
-            </div>
+    <!-- Sidebar Navigation -->
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h3>Navigation</h3>
+            <button id="closeSidebar" class="close-sidebar">&times;</button>
         </div>
-
-        <div class="form-column">
-            <div class="modal-buttons-container">
-                <h2 style="text-align: center; margin-bottom: 20px;">Modals</h2>
-                <button type="button" class="modal-btn" onclick="openModal('trackEventModal')">Track Events</button>
-                <button type="button" class="modal-btn" onclick="openModal('tourModal')">Trigger Tour</button>
+        <div class="sidebar-content">
+            <div class="sidebar-section">
+                <h4>Bot Actions</h4>
+                <div class="sidebar-button-row" data-intercom-target="bot-button">
+                    <button type="button" class="sidebar-btn button-bot button-one">Trigger Workflow</button>
+                </div>
             </div>
+
+            <div class="sidebar-section">
+                <h4>Tours</h4>
+                <div class="sidebar-button-row">
+                    <button type="button" class="sidebar-btn button-tour-one" onclick="Intercom('startTour', 598573)">TriggerTour</button>
+                </div>
+                <div class="sidebar-button-row">
+                    <a class="sidebar-link tour_link" href="https://intercom-trad-demo.vercel.app/?product_tour_id=617424">Tour Link</a>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h4>Surveys</h4>
+                <div class="sidebar-button-row">
+                    <button type="button" class="sidebar-btn button-survey-one" onclick="Intercom('startSurvey', 24407803)">Large Survey</button>
+                </div>
+                <div class="sidebar-button-row">
+                    <button type="button" class="sidebar-btn button-survey-two" onclick="Intercom('startSurvey', 24407890)">Small Survey</button>
+                </div>
+                <div class="sidebar-button-row">
+                    <a class="sidebar-link survey_link" href="https://intercom-trad-demo.vercel.app?intercom_survey_id=24407890">Survey Link</a>
+                </div>
+            </div>
+
+
+
+            <div class="sidebar-section">
+                <h4>Events</h4>
+                <div class="sidebar-button-row">
+                    <button type="button" class="sidebar-btn button-bot button-one" id="event" onclick="Intercom('trackEvent', 'event-click')" data-intercom-target="Button">Event</button>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h4>Navigation</h4>
+                <div class="sidebar-button-row">
+                    <a class="sidebar-link" href="/new-tab" target="_blank">Link to a new tab</a>
+                </div>
+                <div class="sidebar-button-row">
+                    <a class="sidebar-link" href="/page-two">Link to dropdowns</a>
+                </div>
+            </div>
+
+                         <div class="sidebar-section">
+                 <h4>Help & Support</h4>
+                 <div class="sidebar-button-row">
+                     <a class="sidebar-btn button-help-center-icon" href="https://intercom.help/narnia-4d7ae34e3be0">
+                         <img src="/helpcenter-icon.svg" alt="Help Center" class="help-icon">
+                     </a>
+                 </div>
+             </div>
         </div>
     </div>
 
-    <div class="bot-buttons">
-        <div class="button-row" data-intercom-target="bot-button">
-            <button type="button" class="button-bot button-one">Bot Button</button>
-        </div>
-        <div class="button-row">
-            <button type="button" class="button-tour-one" onclick="Intercom('startTour', 598573)">Tour Button</button>
-            <a class="tour_link" href="https://intercom-trad-demo.vercel.app/?product_tour_id=617424">Tour Link</a>
-        </div>
-        <div class="button-row">
-            <button type="button" class="button-survey-one" onclick="Intercom('startSurvey', 24407803)">Large Survey</button>
-            <button type="button" class="button-survey-two" onclick="Intercom('startSurvey', 24407890)">Small Survey</button>
-            <a class="survey_link" href="https://intercom-trad-demo.vercel.app?intercom_survey_id=24407890">Survey Link</a>
-        </div>
-        <div class="button-row">
-            <a class="button-help-center" href="https://intercom.help/narnia-4d7ae34e3be0">Help Center</a>
-        </div>
-        <div class="button-row">
-            <button type="button" class="button-bot button-one" id="event" onclick="Intercom('trackEvent', 'event-click')" data-intercom-target="Button">Event</button>
-        </div>
-        <div class="button-row">
-            <a href="/new-tab" target="_blank">Link to a new tab</a>
-        </div>
-        <div class="button-row">
-            <a href="/page-two">Page Two</a>
+    <!-- Sidebar Toggle Button -->
+    <button id="sidebarToggle" class="sidebar-toggle">☰</button>
+
+    <!-- Main Content Area -->
+    <div id="mainContent" class="main-content">
+        <main class="about__display--row">
+            <h1>Intercom Test Site - Traditional installation</h1>
+        </main>
+
+        <div class="forms-container">
+            <div class="form-column">
+                <div class="form-container">
+                    <p>Please enter your details to log in to Intercom</p>
+
+                    <form id="userDataForm">
+                        <div class="form-group">
+                            <label for="user_id">User ID:</label>
+                            <input type="text" id="user_id" name="user_id">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="company_id">Company ID:</label>
+                            <input type="text" id="company_id" name="company_id">
+                        </div>
+                        <div class="form-group">
+                            <label for="company">Company Name:</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+                        <div class="button-group">
+                            <button type="submit" class="submit-btn">Boot User</button>
+                            <button type="button" class="clear-btn" onclick="clearBootForm()">Clear Form</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="form-container">
+                    <h3>Add Custom Attributes</h3>
+                    <form id="customAttributesForm">
+                        <div class="form-group">
+                            <label for="attribute_name">Attribute Name:</label>
+                            <input type="text" id="attribute_name" name="attribute_name" placeholder="e.g., subscription_type">
+                        </div>
+                        <div class="form-group">
+                            <label for="attribute_value">Attribute Value:</label>
+                            <input type="text" id="attribute_value" name="attribute_value" placeholder="e.g., premium">
+                        </div>
+                        <div class="button-group">
+                            <button type="submit" class="submit-btn">Update User</button>
+                            <button type="button" class="clear-btn" onclick="clearAttributesForm()">Clear Form</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="action-buttons">
+                    <button type="button" class="empty-update-btn" onclick="performEmptyUpdate()">Empty Update</button>
+                    <button type="button" class="shutdown-btn" onclick="performShutdown()">Shutdown</button>
+                </div>
+            </div>
+
+            <div class="form-column">
+                <div class="modal-buttons-container">
+                    <h2 style="text-align: center; margin-bottom: 20px;">Modals</h2>
+                    <button type="button" class="modal-btn" onclick="openModal('trackEventModal')">Track Events</button>
+                    <button type="button" class="modal-btn" onclick="openModal('tourModal')">Trigger Tour</button>
+                </div>
+            </div>
         </div>
     </div>
 
