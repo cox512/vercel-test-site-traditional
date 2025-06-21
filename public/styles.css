@@ -214,3 +214,9 @@
 .bg-blue {
     background-color: #2196F3;
 }
+
+/* Main page header styling */
+.about__display--row {
+    text-align: center;
+    margin: 20px 0;
+}

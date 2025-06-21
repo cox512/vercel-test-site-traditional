@@ -5,13 +5,8 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <!-- Google Tag Manager (noscript) -->
-<!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TQV53SD"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> -->
-<!-- End Google Tag Manager (noscript) -->
     <main class="about__display--row">
-        <h1>Home</h1>
-        <h2>Log in to Intercom</h2>
+        <h1>Intercom Test Site - Traditional installation</h1>
         <p>Please enter your details to log in to Intercom.</p>
     </main>
 
@@ -110,26 +105,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <div class="bot-buttons">
-        <div class="button-row">
+        <div class="button-row" data-intercom-target="bot-button">
             <button type="button" class="button-bot button-one">Bot Button 1</button>
-            <button type="button" class="button-bot button-two">Bot Button 2</button>
         </div>
         <div class="button-row">
-            <button type="button" class="button-tour-one" onclick="Intercom('startTour', 279111)">Tour Button 1</button>
-            <button type="button" class="button-tour-two" onclick="Intercom('startTour', 279727)">Tour Button 2</button>
-            <a class="tour_link" href="https://useful-useful-daffodil.glitch.me/?product_tour_id=556887">Tour Link</a>
+            <button type="button" class="button-tour-one" onclick="Intercom('startTour', 598573)">Tour Button 1</button>
+            <a class="tour_link" href="https://intercom-trad-demo.vercel.app/?product_tour_id=617424">Tour Link</a>
         </div>
         <div class="button-row">
             <button type="button" class="button-survey-one" onclick="Intercom('startSurvey', 24407803)">Large Survey</button>
             <button type="button" class="button-survey-two" onclick="Intercom('startSurvey', 24407890)">Small Survey</button>
-            <a class="survey_link" href="https://evening-shelf-73540.herokuapp.com/?intercom_survey_id=24407803">Survey Link</a>
+            <a class="survey_link" href="https://intercom-trad-demo.vercel.app?intercom_survey_id=24407890">Survey Link</a>
         </div>
         <div class="button-row">
             <a class="button-help-center" href="https://intercom.help/narnia-4d7ae34e3be0">Help Center</a>
         </div>
         <div class="button-row">
             <button type="button" class="button-bot button-one" id="event" onclick="Intercom('trackEvent', 'event-click')" data-intercom-target="Button">Event 1</button>
-            <button type="button" class="button-bot button-one" id="event" onclick="Intercom('trackEvent', 'event-click')" data-intercom-target="Button">Event 2</button>
         </div>
         <div class="button-row">
             <a href="/new-tab" target="_blank">Link to a new tab</a>

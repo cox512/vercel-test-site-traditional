@@ -38,10 +38,6 @@ app.set("views", path.join(__dirname, "views"));
 // Imports all of the routes from ./routes/index.js
 app.use(routes);
 
-app.get("/", (req, res) => {
-  res.render("landing");
-});
-
 app.get("/new-tab", (req, res) => {
   res.render("new-tab");
 });
