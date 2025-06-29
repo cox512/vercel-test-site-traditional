@@ -1,3 +1,44 @@
+// Global variable to store current user identification for JWT generation
+let currentUserData = {
+  user_id: null,
+  email: null,
+  name: null,
+};
+
+// Helper function to clean JWT payload
+function cleanJWTPayload(data) {
+  const cleaned = { ...data };
+  Object.keys(cleaned).forEach((key) => {
+    if (cleaned[key] === null || cleaned[key] === undefined) {
+      delete cleaned[key];
+    }
+  });
+  return cleaned;
+}
+
+// JWT Token Management
+async function generateJWT(userData = {}) {
+  try {
+    const response = await fetch("/api/generate-jwt", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.token;
+  } catch (error) {
+    console.error("Failed to generate JWT token:", error);
+    return null;
+  }
+}
+
 function clearBootForm() {
   document.getElementById("user_id").value = "";
   document.getElementById("name").value = "";
@@ -21,14 +62,35 @@ function clearTourForm() {
   document.getElementById("tour_id").value = "";
 }
 
-function performEmptyUpdate() {
-  Intercom("update", {
+async function performEmptyUpdate() {
+  const updateData = {
     last_request_at: parseInt(new Date().getTime() / 1000),
+  };
+
+  // Include current user identification data for JWT generation
+  const jwtUserData = cleanJWTPayload({
+    ...currentUserData,
+    ...updateData,
   });
+
+  // Get JWT token for the update
+  const token = await generateJWT(jwtUserData);
+  if (token) {
+    updateData.intercom_user_jwt = token;
+  }
+
+  Intercom("update", updateData);
 }
 
 function performShutdown() {
   Intercom("shutdown");
+
+  // Clear stored user data
+  currentUserData = {
+    user_id: null,
+    email: null,
+    name: null,
+  };
 }
 
 // Modal functions
@@ -227,7 +289,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // User data form submission handler
   document
     .getElementById("userDataForm")
-    .addEventListener("submit", function (e) {
+    .addEventListener("submit", async function (e) {
       e.preventDefault();
 
       // Get form data
@@ -243,7 +305,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Create boot data object, only including non-empty values
       const bootData = {
-        app_id: "<%= env.INTERCOM_APP_ID %>",
+        app_id: window.intercomSettings?.app_id || "your-app-id-here",
       };
 
       // Only add user_id if it's not empty
@@ -274,6 +336,25 @@ document.addEventListener("DOMContentLoaded", function () {
         );
       }
 
+      // Generate JWT token for the boot data
+      const jwtUserData = cleanJWTPayload({
+        user_id: bootData.user_id,
+        email: bootData.email,
+        name: bootData.name,
+      });
+
+      // Store current user data for future JWT generation
+      currentUserData = {
+        user_id: bootData.user_id || null,
+        email: bootData.email || null,
+        name: bootData.name || null,
+      };
+
+      const token = await generateJWT(jwtUserData);
+      if (token) {
+        bootData.intercom_user_jwt = token;
+      }
+
       // Boot the user in Intercom
       Intercom("boot", bootData);
     });
@@ -281,7 +362,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Custom attributes form submission handler
   document
     .getElementById("customAttributesForm")
-    .addEventListener("submit", function (e) {
+    .addEventListener("submit", async function (e) {
       e.preventDefault();
 
       const attributeName = document.getElementById("attribute_name").value;
@@ -296,6 +377,18 @@ document.addEventListener("DOMContentLoaded", function () {
       const customData = {
         [attributeName]: attributeValue,
       };
+
+      // Include current user identification data for JWT generation
+      const jwtUserData = cleanJWTPayload({
+        ...currentUserData,
+        ...customData,
+      });
+
+      // Generate JWT token for the update data
+      const token = await generateJWT(jwtUserData);
+      if (token) {
+        customData.intercom_user_jwt = token;
+      }
 
       // Update the user with the custom attribute
       Intercom("update", customData);

@@ -247,7 +247,20 @@
     margin: 20px auto;
     max-width: 1200px;
     flex-wrap: wrap;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
+
+/* Center the page header properly */
+.about__display--row {
+    text-align: center;
+    margin: 20px auto;
+    max-width: 1200px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+
 
 .form-column {
     flex: 1;
@@ -408,6 +421,14 @@
         margin-left: 0; /* Don't shift main content on mobile */
     }
 
+    .forms-container {
+        padding: 0 15px; /* Reduce padding on mobile */
+    }
+
+    .about__display--row {
+        padding: 0 15px;
+    }
+
     .sidebar-overlay {
         display: block;
         opacity: 0;
@@ -425,10 +446,16 @@
     .forms-container {
         flex-direction: column;
         align-items: center;
+        padding: 0 10px; /* Minimal padding on very small screens */
     }
+
     .form-column {
         width: 100%;
         max-width: 100%;
+    }
+
+    .about__display--row {
+        padding: 0 10px;
     }
 
     .sidebar {
@@ -521,11 +548,7 @@
     background-color: #2196F3;
 }
 
-/* Main page header styling */
-.about__display--row {
-    text-align: center;
-    margin: 20px 0;
-}
+/* Main page header styling moved above */
 
 /* Modal Styles */
 .modal {
