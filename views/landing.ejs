@@ -22,23 +22,23 @@
             <div class="sidebar-section">
                 <h4>Tours</h4>
                 <div class="sidebar-button-row">
-                    <button type="button" class="sidebar-btn button-tour-one" onclick="Intercom('startTour', 598573)">TriggerTour</button>
+                    <button type="button" class="sidebar-btn button-tour-one" onclick="Intercom('startTour', <%= env.TRIGGER_TOUR_ID %>)">Trigger Tour</button>
                 </div>
                 <div class="sidebar-button-row">
-                    <a class="sidebar-link tour_link" href="https://intercom-trad-demo.vercel.app/?product_tour_id=617424">Tour Link</a>
+                    <a class="sidebar-link tour_link" href="https://intercom-trad-demo.vercel.app/?product_tour_id=<%= env.TOUR_LINK_ID %>">Tour Link</a>
                 </div>
             </div>
 
             <div class="sidebar-section">
                 <h4>Surveys</h4>
                 <div class="sidebar-button-row">
-                    <button type="button" class="sidebar-btn button-survey-one" onclick="Intercom('startSurvey', 24407803)">Large Survey</button>
+                    <button type="button" class="sidebar-btn button-survey-one" onclick="Intercom('startSurvey', <%= env.LARGE_SURVEY_ID %>)">Large Survey</button>
                 </div>
                 <div class="sidebar-button-row">
-                    <button type="button" class="sidebar-btn button-survey-two" onclick="Intercom('startSurvey', 24407890)">Small Survey</button>
+                    <button type="button" class="sidebar-btn button-survey-two" onclick="Intercom('startSurvey', <%= env.SMALL_SURVEY_ID %>)">Small Survey</button>
                 </div>
                 <div class="sidebar-button-row">
-                    <a class="sidebar-link survey_link" href="https://intercom-trad-demo.vercel.app?intercom_survey_id=24407890">Survey Link</a>
+                    <a class="sidebar-link survey_link" href="https://intercom-trad-demo.vercel.app?intercom_survey_id=<%= env.SURVEY_LINK_ID %>">Survey Link</a>
                 </div>
             </div>
 
@@ -47,7 +47,7 @@
             <div class="sidebar-section">
                 <h4>Events</h4>
                 <div class="sidebar-button-row">
-                    <button type="button" class="sidebar-btn button-bot button-one" id="event" onclick="Intercom('trackEvent', 'event-click')" data-intercom-target="Button">Event</button>
+                    <button type="button" class="sidebar-btn button-bot button-one" id="event" onclick="Intercom('trackEvent', 'event-click')" data-intercom-target="Button">Event-Click</button>
                 </div>
             </div>
 
@@ -151,10 +151,10 @@
     <!-- Track Events Modal -->
     <div id="trackEventModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header track-event-modal-header">
+                <span class="close" onclick="closeModal('trackEventModal')">&times;</span>
                 <h3>Track Events</h3>
                 <p>You can dismiss this modal by clicking anywhere outside of it.</p>
-                <span class="close" onclick="closeModal('trackEventModal')">&times;</span>
             </div>
             <div class="modal-body">
                 <form id="trackEventForm">
@@ -182,10 +182,10 @@
     <!-- Trigger Tour Modal -->
     <div id="tourModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header tour-modal-header">
+                <span class="close" onclick="closeModal('tourModal')">&times;</span>
                 <h3>Trigger Tour</h3>
                 <p>You must submit, cancel, or dismiss this modal to access the background UI.</p>
-                <span class="close" onclick="closeModal('tourModal')">&times;</span>
             </div>
             <div class="modal-body">
                 <form id="tourForm">

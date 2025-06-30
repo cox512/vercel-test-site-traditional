@@ -554,7 +554,7 @@
 .modal {
     display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: 1002;
     left: 0;
     top: 0;
     width: 100%;
@@ -567,6 +567,54 @@
 #tourModal {
     background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(2px);
+}
+
+/* Tour modal header specific styles */
+.tour-modal-header {
+    position: relative;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tour-modal-header .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.tour-modal-header h3 {
+    margin: 0 0 10px 0;
+}
+
+.tour-modal-header p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+/* Track Event modal header specific styles */
+.track-event-modal-header {
+    position: relative;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.track-event-modal-header .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.track-event-modal-header h3 {
+    margin: 0 0 10px 0;
+}
+
+.track-event-modal-header p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
 }
 
 .modal-content {
