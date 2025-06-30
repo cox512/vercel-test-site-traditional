@@ -110,20 +110,135 @@ After running these commands, you should see a folder called `vercel-test-site-t
 
 **Important Note**: Your project will deploy but won't function properly until you add the required environment variables (covered in step 3 below).
 
-#### Option B: Deploy via Vercel CLI
+#### Option B: Deploy via Vercel CLI (Command Line Interface)
 
+##### Prerequisites
+- Make sure you've completed **Step 1** (cloning the repository) first
+- You need Node.js installed on your computer ([download here](https://nodejs.org/) if you don't have it)
+- Your terminal should be open and you should be in the project directory
+
+##### Step B1: Install the Vercel CLI Tool
 ```bash
-# Install Vercel CLI globally
+# Install Vercel's command-line tool globally on your computer
 npm install -g vercel
-
-# Login to Vercel
-vercel login
-
-# Deploy the project
-vercel
-
-# Follow the prompts to configure your project
 ```
+
+**What this does**: Downloads and installs Vercel's command-line tool so you can deploy from your terminal. The `-g` flag means "global" - it installs it for your entire computer, not just this project.
+
+**If you get permission errors**:
+- On Mac/Linux: Try `sudo npm install -g vercel` (you'll need to enter your password)
+- On Windows: Run your command prompt as Administrator
+
+##### Step B2: Verify the Installation
+```bash
+# Check if Vercel CLI was installed correctly
+vercel --version
+```
+
+**What this does**: Shows the version number of Vercel CLI if it installed correctly. You should see something like `Vercel CLI 32.5.0` (numbers may vary).
+
+##### Step B3: Login to Your Vercel Account
+```bash
+# Start the login process
+vercel login
+```
+
+**What happens next**:
+1. Vercel will ask you to choose a login method
+2. Select "Continue with GitHub" (recommended)
+3. Your web browser will open automatically
+4. Sign in to your GitHub account if you're not already logged in
+5. Authorize Vercel to access your GitHub account
+6. Return to your terminal - you should see a success message
+
+**If the browser doesn't open**: Copy the URL that appears in your terminal and paste it into your web browser manually.
+
+##### Step B4: Navigate to Your Project Directory
+```bash
+# Make sure you're in the right folder
+cd vercel-test-site-traditional
+
+# Verify you're in the right place by listing the files
+ls
+```
+
+**What you should see**: You should see files like `app.js`, `package.json`, `vercel.json`, and folders like `api/`, `public/`, `views/`.
+
+##### Step B5: Deploy Your Project
+```bash
+# Start the deployment process
+vercel
+```
+
+**What happens next - Vercel will ask you several questions**:
+
+1. **"Set up and deploy [your project path]?"**
+   - Type `y` and press Enter
+
+2. **"Which scope do you want to deploy to?"**
+   - Choose your personal account (usually your GitHub username)
+   - Use arrow keys to select, then press Enter
+
+3. **"Link to existing project?"**
+   - Type `n` (no) and press Enter (since this is your first deployment)
+
+4. **"What's your project's name?"**
+   - Press Enter to accept the default name, or type a custom name
+
+5. **"In which directory is your code located?"**
+   - Type `./` and press Enter (this means the current directory)
+
+**What happens during deployment**:
+- Vercel will upload your files
+- Build your project (this may take 1-2 minutes)
+- Deploy it to a live URL
+- Show you the deployment URL when complete
+
+##### Step B6: View Your Deployed Site
+After deployment completes, you'll see output like:
+```
+✅  Production: https://your-project-name.vercel.app [copied to clipboard]
+```
+
+**What to do**:
+- Click the URL or copy and paste it into your web browser
+- Your site is now live! (But remember, it won't work properly until you add environment variables)
+
+##### Step B7: Set Up Environment Variables
+Unlike the dashboard method, with CLI you need to add environment variables through the Vercel dashboard:
+
+1. Go to [vercel.com/dashboard](https://vercel.com/dashboard)
+2. Find your newly deployed project and click on it
+3. Click "Settings" → "Environment Variables"
+4. Add all the required environment variables (see Step 3 in the main guide)
+5. Redeploy by running `vercel --prod` in your terminal
+
+##### Future Deployments
+Once set up, deploying updates is easy:
+```bash
+# Deploy updates to production
+vercel --prod
+```
+
+##### Troubleshooting CLI Deployment
+
+**"Command not found: vercel"**
+- The CLI didn't install properly
+- Try: `npm install -g vercel` again
+- On Mac/Linux, try: `sudo npm install -g vercel`
+
+**"Login failed"**
+- Make sure you have a Vercel account
+- Try clearing your browser cache and trying `vercel login` again
+
+**"Build failed"**
+- Check that you're in the correct directory (`cd vercel-test-site-traditional`)
+- Make sure `package.json` exists in your current directory
+- Try running `npm install` first
+
+**Permission errors**
+- On Mac/Linux: Add `sudo` before npm commands
+- On Windows: Run Command Prompt as Administrator
 
 ### 3. Configure Environment Variables
 
