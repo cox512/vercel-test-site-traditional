@@ -58,8 +58,6 @@ git clone https://github.com/YOUR-USERNAME/vercel-test-site-traditional.git
 cd vercel-test-site-traditional
 ```
 
-**What this does**: Changes your current location to inside the project folder so you can work with the files.
-
 #### Step 1f: Install Project Dependencies (Optional - Only for Local Development)
 ```bash
 # Install the required packages (only needed if you plan to run the project locally)
