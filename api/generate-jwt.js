@@ -12,13 +12,27 @@ module.exports = async (req, res) => {
     return;
   }
 
+  console.log("JWT API called:", {
+    method: req.method,
+    url: req.url,
+    hasSecret: !!process.env.INTERCOM_JSON_SECRET,
+    timestamp: new Date().toISOString(),
+  });
+
   try {
     // Get the API secret from environment variables
     const apiSecret = process.env.INTERCOM_JSON_SECRET;
 
     if (!apiSecret) {
+      console.error("INTERCOM_JSON_SECRET not found in environment variables");
       return res.status(500).json({
         error: "INTERCOM_JSON_SECRET environment variable is not set",
+        debug: {
+          availableEnvVars: Object.keys(process.env).filter((key) =>
+            key.includes("INTERCOM")
+          ),
+          timestamp: new Date().toISOString(),
+        },
       });
     }
 
@@ -57,6 +71,10 @@ module.exports = async (req, res) => {
     res.status(500).json({
       error: "Failed to generate JWT token",
       details: error.message,
+      debug: {
+        timestamp: new Date().toISOString(),
+        stack: process.env.NODE_ENV === "development" ? error.stack : undefined,
+      },
     });
   }
 };
