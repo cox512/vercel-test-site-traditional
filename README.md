@@ -47,7 +47,7 @@ cd Desktop
 
 #### Step 1d: Clone Your Forked Repository
 
-# Replace 'YOUR-USERNAME' with your actual GitHub username
+Replace 'YOUR-USERNAME' with your actual GitHub username
 ```bash
 git clone https://github.com/YOUR-USERNAME/vercel-test-site-traditional.git
 ```
@@ -56,14 +56,14 @@ git clone https://github.com/YOUR-USERNAME/vercel-test-site-traditional.git
 
 #### Step 1e: Enter the Project Directory
 
-# Navigate into the project folder that was just created
+Navigate into the project folder that was just created
 ```bash
 cd vercel-test-site-traditional
 ```
 
 #### Step 1f: Install Project Dependencies (Optional - Only for Local Development)
 
-# Install the required packages (only needed if you plan to run the project locally)
+Install the required packages (only needed if you plan to run the project locally)
 ```bash
 npm install
 ```
@@ -121,7 +121,7 @@ After running these commands, you should see a folder called `vercel-test-site-t
 
 ##### Step B1: Install the Vercel CLI Tool
 
-# Install Vercel's command-line tool globally on your computer
+Install Vercel's command-line tool globally on your computer
 ```bash
 npm install -g vercel
 ```
@@ -134,7 +134,7 @@ npm install -g vercel
 
 ##### Step B2: Verify the Installation
 
-# Check if Vercel CLI was installed correctly
+Check if Vercel CLI was installed correctly
 ```bash
 vercel --version
 ```
@@ -143,7 +143,7 @@ vercel --version
 
 ##### Step B3: Login to Your Vercel Account
 
-# Start the login process
+Start the login process
 ```bash
 vercel login
 ```
@@ -160,11 +160,11 @@ vercel login
 
 ##### Step B4: Navigate to Your Project Directory
 
-# Make sure you're in the right folder
+Make sure you're in the right folder
 ```bash
 cd vercel-test-site-traditional
 ```
-# Verify you're in the right place by listing the files
+Verify you're in the right place by listing the files
 ```bash
 ls
 ```
@@ -173,7 +173,7 @@ ls
 
 ##### Step B5: Deploy Your Project
 
-# Start the deployment process
+Start the deployment process
 ```bash
 vercel
 ```
@@ -224,7 +224,7 @@ Unlike the dashboard method, with CLI you need to add environment variables thro
 ##### Future Deployments
 Once set up, deploying updates is easy:
 
-# Deploy updates to production
+Deploy updates to production
 ```bash
 vercel --prod
 ```
@@ -290,21 +290,21 @@ SURVEY_LINK_ID=survey_id
 
 To run the project locally for development:
 
-# Create a .env file in the root directory
+Create a .env file in the root directory
 ```bash
 touch .env
 ```
-# Add your environment variables to .env along with the other variables from above
+Add your environment variables to .env along with the other variables from above
 ```bash
 echo "INTERCOM_APP_ID=your_app_id" >> .env
 echo "INTERCOM_JSON_SECRET=your_secret_key" >> .env
 ```
 
-# Start the development server
+Start the development server
 ```bash
 npm run dev
 ```
-# Open your browser to http://localhost:3000
+Open your browser to http://localhost:3000
 
 
 ## Project Structure
