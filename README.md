@@ -92,8 +92,9 @@ After running these commands, you should see a folder called `vercel-test-site-t
 
 1. **Sign in to Vercel**
    - Go to [vercel.com](https://vercel.com)
+   - Click the "Log In" button if you aren't already logged into your account
    - Click "Continue with GitHub" to sign in with your GitHub account
-   - Authorize Vercel to access your GitHub repositories when prompted
+   - Authorize Vercel to access your GitHub repositories when prompted, do not authorize it to access your organizational data if it asks
 
 2. **Create a New Project**
    - Once logged in, click the "New Project" button on your Vercel dashboard
