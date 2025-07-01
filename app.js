@@ -24,11 +24,6 @@ app.use(express.urlencoded({ extended: true }));
 // Serve static files
 app.use(express.static(path.join(__dirname, "public")));
 
-// Direct route for CSS
-app.get("/styles.css", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "styles.css"));
-});
-
 // Set up view engine
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));

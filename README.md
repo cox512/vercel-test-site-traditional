@@ -38,29 +38,44 @@ Before you can deploy to Vercel, you need to get a copy of the code on your comp
 - **On Linux**: Press `Ctrl + Alt + T`
 
 #### Step 1c: Navigate to Where You Want to Store the Project
-```bash
-# Navigate to your Desktop or Documents folder (or wherever you want to store the project)
-cd Desktop
 
+Navigate to your Desktop or Documents folder (or wherever you want to store the project):
+
+```bash
+cd Desktop
+```
+
+Or navigate to Documents folder:
+```bash
+cd Documents
+```
+
+Or create a new folder for your projects:
+```bash
+mkdir my-projects
+cd my-projects
 ```
 
 #### Step 1d: Clone Your Forked Repository
+
+Replace 'YOUR-USERNAME' with your actual GitHub username:
 ```bash
-# Replace 'YOUR-USERNAME' with your actual GitHub username
 git clone https://github.com/YOUR-USERNAME/vercel-test-site-traditional.git
 ```
 
 **What this does**: Downloads a complete copy of the project code to your computer.
 
 #### Step 1e: Enter the Project Directory
+
+Navigate into the project folder that was just created:
 ```bash
-# Navigate into the project folder that was just created
 cd vercel-test-site-traditional
 ```
 
 #### Step 1f: Install Project Dependencies (Optional - Only for Local Development)
+
+Install the required packages (only needed if you plan to run the project locally):
 ```bash
-# Install the required packages (only needed if you plan to run the project locally)
 npm install
 ```
 
@@ -116,8 +131,9 @@ After running these commands, you should see a folder called `vercel-test-site-t
 - Your terminal should be open and you should be in the project directory
 
 ##### Step B1: Install the Vercel CLI Tool
+
+Install Vercel's command-line tool globally on your computer:
 ```bash
-# Install Vercel's command-line tool globally on your computer
 npm install -g vercel
 ```
 
@@ -128,16 +144,18 @@ npm install -g vercel
 - On Windows: Run your command prompt as Administrator
 
 ##### Step B2: Verify the Installation
+
+Check if Vercel CLI was installed correctly:
 ```bash
-# Check if Vercel CLI was installed correctly
 vercel --version
 ```
 
 **What this does**: Shows the version number of Vercel CLI if it installed correctly. You should see something like `Vercel CLI 32.5.0` (numbers may vary).
 
 ##### Step B3: Login to Your Vercel Account
+
+Start the login process:
 ```bash
-# Start the login process
 vercel login
 ```
 
@@ -152,19 +170,23 @@ vercel login
 **If the browser doesn't open**: Copy the URL that appears in your terminal and paste it into your web browser manually.
 
 ##### Step B4: Navigate to Your Project Directory
-```bash
-# Make sure you're in the right folder
-cd vercel-test-site-traditional
 
-# Verify you're in the right place by listing the files
+Make sure you're in the right folder:
+```bash
+cd vercel-test-site-traditional
+```
+
+Verify you're in the right place by listing the files:
+```bash
 ls
 ```
 
 **What you should see**: You should see files like `app.js`, `package.json`, `vercel.json`, and folders like `api/`, `public/`, `views/`.
 
 ##### Step B5: Deploy Your Project
+
+Start the deployment process:
 ```bash
-# Start the deployment process
 vercel
 ```
 
@@ -209,12 +231,16 @@ Unlike the dashboard method, with CLI you need to add environment variables thro
 2. Find your newly deployed project and click on it
 3. Click "Settings" → "Environment Variables"
 4. Add all the required environment variables (see Step 3 in the main guide)
-5. Redeploy by running `vercel --prod` in your terminal
+5. Redeploy by running the following command in your terminal:
+
+```bash
+vercel --prod
+```
 
 ##### Future Deployments
+
 Once set up, deploying updates is easy:
 ```bash
-# Deploy updates to production
 vercel --prod
 ```
 
@@ -222,20 +248,38 @@ vercel --prod
 
 **"Command not found: vercel"**
 - The CLI didn't install properly
-- Try: `npm install -g vercel` again
-- On Mac/Linux, try: `sudo npm install -g vercel`
+- Try installing again:
+  ```bash
+  npm install -g vercel
+  ```
+- On Mac/Linux, try with sudo:
+  ```bash
+  sudo npm install -g vercel
+  ```
 
 **"Login failed"**
 - Make sure you have a Vercel account
-- Try clearing your browser cache and trying `vercel login` again
+- Try clearing your browser cache and running the login command again:
+  ```bash
+  vercel login
+  ```
 
 **"Build failed"**
-- Check that you're in the correct directory (`cd vercel-test-site-traditional`)
+- Check that you're in the correct directory:
+  ```bash
+  cd vercel-test-site-traditional
+  ```
 - Make sure `package.json` exists in your current directory
-- Try running `npm install` first
+- Try installing dependencies first:
+  ```bash
+  npm install
+  ```
 
 **Permission errors**
-- On Mac/Linux: Add `sudo` before npm commands
+- On Mac/Linux: Add `sudo` before npm commands:
+  ```bash
+  sudo npm install -g vercel
+  ```
 - On Windows: Run Command Prompt as Administrator
 
 ### 3. Configure Environment Variables
@@ -279,20 +323,28 @@ SURVEY_LINK_ID=survey_id
 
 To run the project locally for development:
 
+Create a .env file in the root directory:
 ```bash
-# Create a .env file in the root directory
 touch .env
+```
 
-# Add your environment variables to .env
+Add your environment variables to the .env file (repeat for all variables from the table above):
+```bash
 echo "INTERCOM_APP_ID=your_app_id" >> .env
 echo "INTERCOM_JSON_SECRET=your_secret_key" >> .env
-# ... add other variables from above
-
-# Start the development server
-npm run dev
-
-# Open your browser to http://localhost:3000
+echo "TRIGGER_TOUR_ID=your_tour_id" >> .env
+echo "TOUR_LINK_ID=your_tour_id" >> .env
+echo "LARGE_SURVEY_ID=your_survey_id" >> .env
+echo "SMALL_SURVEY_ID=your_survey_id" >> .env
+echo "SURVEY_LINK_ID=your_survey_id" >> .env
 ```
+
+Start the development server:
+```bash
+npm run dev
+```
+
+Open your browser to: http://localhost:3000
 
 ## Project Structure
 

@@ -350,62 +350,6 @@
     background-color: #E64A19;
 }
 
-/* Legacy bot-buttons styles (now unused but kept for compatibility) */
-.bot-buttons {
-    position: relative;
-    text-align: left;
-    margin: 20px auto;
-    max-width: 1200px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    display: none; /* Hidden since content moved to sidebar */
-}
-
-.button-bot, .button-tour-one, .button-tour-two, .button-survey-one, .button-survey-two {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin: 5px;
-    display: inline-block;
-}
-
-.button-bot:hover, .button-tour-one:hover, .button-tour-two:hover, .button-survey-one:hover, .button-survey-two:hover {
-    background-color: #45a049;
-}
-
-.tour_link, .survey_link {
-    color: #2196F3;
-    text-decoration: underline;
-    margin: 5px;
-    display: inline-block;
-}
-
-.tour_link:hover, .survey_link:hover {
-    color: #1976D2;
-}
-
-.button-help-center {
-    display: inline-block;
-    background-color: #2196F3;
-    color: white;
-    padding: 10px 15px;
-    text-decoration: none;
-    border-radius: 4px;
-    margin: 5px;
-}
-
-.button-help-center:hover {
-    background-color: #1976D2;
-}
-
-.button-row {
-    margin: 10px 0;
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .sidebar {
@@ -669,6 +613,11 @@
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+
+.modal-section-title {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .modal-btn {
