@@ -25,7 +25,7 @@
                     <button type="button" class="sidebar-btn button-tour-one" onclick="Intercom('startTour', <%= env.TRIGGER_TOUR_ID %>)">Trigger Tour</button>
                 </div>
                 <div class="sidebar-button-row">
-                    <a class="sidebar-link tour_link" href="https://intercom-trad-demo.vercel.app/?product_tour_id=<%= env.TOUR_LINK_ID %>">Tour Link</a>
+                    <a class="sidebar-link tour_link" href="<%= env.TOUR_LINK %>">Tour Link</a>
                 </div>
             </div>
 
@@ -38,7 +38,7 @@
                     <button type="button" class="sidebar-btn button-survey-two" onclick="Intercom('startSurvey', <%= env.SMALL_SURVEY_ID %>)">Small Survey</button>
                 </div>
                 <div class="sidebar-button-row">
-                    <a class="sidebar-link survey_link" href="https://intercom-trad-demo.vercel.app?intercom_survey_id=<%= env.SURVEY_LINK_ID %>">Survey Link</a>
+                    <a class="sidebar-link survey_link" href="<%= env.SURVEY_LINK %>">Survey Link</a>
                 </div>
             </div>
 
@@ -64,7 +64,7 @@
                          <div class="sidebar-section">
                  <h4>Help & Support</h4>
                  <div class="sidebar-button-row">
-                     <a class="sidebar-btn button-help-center-icon" href="https://intercom.help/bananas-rule">
+                     <a class="sidebar-btn button-help-center-icon" href="<%= env.HELP_CENTER_URL %>">
                          <img src="/helpcenter-icon.svg" alt="Help Center" class="help-icon">
                      </a>
                  </div>

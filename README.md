@@ -293,11 +293,12 @@ You'll need to set up the following environment variables in your Vercel project
 |----------|-------------|---------------|
 | `INTERCOM_APP_ID` | Your Intercom application ID | Intercom Settings → Installation → Web |
 | `INTERCOM_JSON_SECRET` | Secret key for JWT token generation | Intercom Settings → Authentication → Identity Verification |
-| `TRIGGER_TOUR_ID` | Tour ID for the trigger tour button | Intercom Product Tours → ID for the Tour of your choosing  |
-| `TOUR_LINK_ID` | Tour ID for direct tour links | Intercom Product Tours → ID for the Tour of your choosing |
-| `LARGE_SURVEY_ID` | Survey ID for the large survey | Intercom Surveys → ID for the Large Survey of your choosing |
-| `SMALL_SURVEY_ID` | Survey ID for the small survey | Intercom Surveys → ID for the Small Survey of your choosing |
-| `SURVEY_LINK_ID` | Survey ID for direct survey links | Intercom Surveys → ID for the Survey of your choosing |
+| `TRIGGER_TOUR_ID` | Tour ID for the trigger tour button |
+| `TOUR_LINK` | Tour URL for direct tour links |
+| `LARGE_SURVEY_ID` | Survey ID for the large survey |
+| `SMALL_SURVEY_ID` | Survey ID for the small survey |
+| `SURVEY_LINK` | Survey URL for direct survey links |
+| `HELP_CENTER_URL` | URL for your Intercom Help Center |
 
 #### Setting Environment Variables in Vercel
 
